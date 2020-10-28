@@ -483,7 +483,8 @@ dwiic_acpi_found_iatp(struct dwiic_softc *sc, struct aml_node *node, char *dev,
 	struct i2c_attach_args ia;
 	struct aml_value res;
 
-	if (aml_evalname(acpi_softc, node->parent, "GPIO", 0, NULL, &res))
+	if (aml_evalname(acpi_softc, node->parent, "GPIO", 0, NULL, &res) &&
+            aml_evalname(acpi_softc, node->parent, "_PRW", 0, NULL, &res))
 		/* no gpio, assume this is the bootloader interface */
 		return (0);
 
